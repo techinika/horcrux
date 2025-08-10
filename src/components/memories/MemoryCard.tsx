@@ -14,6 +14,7 @@ interface Memory {
   content: string | null;
   type: string;
   user_id: string;
+  publicUrl?: string;
 }
 
 export default function MemoryCard({ memory }: { memory: Memory }) {
@@ -33,10 +34,14 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
             <Input name="title" defaultValue={memory.title ?? ''} className="text-2xl font-bold" />
           </CardHeader>
           <CardContent>
-            <Textarea name="content" defaultValue={memory.content ?? ''} rows={5} />
+            {memory.type === 'text' ? (
+              <Textarea name="content" defaultValue={memory.content ?? ''} rows={5} />
+            ) : (
+              <p className="text-muted-foreground">Voice memories cannot be edited yet.</p>
+            )}
           </CardContent>
           <CardFooter className="gap-2">
-            <Button type="submit">Save</Button>
+            <Button type="submit" disabled={memory.type !== 'text'}>Save</Button>
             <Button type="button" variant="outline" onClick={() => setIsEditing(false)}>Cancel</Button>
           </CardFooter>
         </form>
@@ -58,7 +63,13 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="whitespace-pre-wrap">{memory.content}</p>
+            {memory.type === 'voice' && memory.publicUrl ? (
+              <audio controls src={memory.publicUrl} className="w-full">
+                Your browser does not support the audio element.
+              </audio>
+            ) : (
+              <p className="whitespace-pre-wrap">{memory.content}</p>
+            )}
           </CardContent>
         </>
       )}
