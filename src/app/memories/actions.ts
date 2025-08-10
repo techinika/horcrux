@@ -52,6 +52,29 @@ export async function deleteMemory(formData: FormData) {
   revalidatePath('/');
 }
 
+export async function createVoiceMemory(filePath: string, title?: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error("User not authenticated");
+  }
+
+  const { error } = await supabase.from('memories').insert({
+    user_id: user.id,
+    title: title || 'Voice Memory',
+    content: filePath,
+    type: 'voice',
+  })
+
+  if (error) {
+    console.error('Error creating voice memory:', error);
+    throw new Error("Failed to save voice memory.");
+  }
+
+  revalidatePath('/dashboard');
+}
+
 export async function updateMemory(formData: FormData) {
   const id = formData.get('id') as string;
   const title = formData.get('title') as string;

@@ -1,4 +1,4 @@
-import { createMemory } from "./memories/actions";
+import { createMemory } from "@/app/memories/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import LogoutButton from "@/components/auth/LogoutButton";
 import MemoryCard from "@/components/memories/MemoryCard";
+import VoiceRecorder from "@/components/memories/VoiceRecorder";
 
 // Define the type for a memory
 interface Memory {
@@ -16,6 +17,7 @@ interface Memory {
   content: string | null;
   type: string;
   user_id: string;
+  publicUrl?: string;
 }
 
 export default async function Home() {
@@ -26,10 +28,18 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const { data: memories, error: memoriesError } = await supabase
+  const { data: memoriesData, error: memoriesError } = await supabase
     .from('memories')
     .select('*')
     .order('created_at', { ascending: false });
+
+  const memories = memoriesData ? await Promise.all(memoriesData.map(async (memory) => {
+    if (memory.type === 'voice' && memory.content) {
+      const { data: { publicUrl } } = supabase.storage.from('voicememories').getPublicUrl(memory.content);
+      return { ...memory, publicUrl };
+    }
+    return memory;
+  })) : [];
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12">
@@ -60,7 +70,9 @@ export default async function Home() {
           </form>
         </Card>
 
-        <div className="space-y-4">
+        <VoiceRecorder />
+
+        <div className="space-y-4 mt-8">
             <h2 className="text-2xl font-bold text-center mb-4 font-serif">Your Memories</h2>
             {memoriesError && <p className="text-destructive">Error loading memories: {memoriesError.message}</p>}
             {memories && memories.length > 0 ? (
