@@ -1,6 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Horcrux - Your Magical Memory Keeper
 
-## Getting Started
+Horcrux is a web application that serves as a personalized, AI-powered memory keeper and note-taker. The app is designed to capture a user's thoughts, feelings, and events, and use this data to create an interactive, narrative-driven experience. The core concept is to create a digital "soul" of the user that can be accessed and explored in a magical, story-like format.
+
+## ✨ Features
+
+- **User Authentication:** Secure sign-up and login functionality powered by Supabase Auth.
+- **Text-Based Memory Capture:** Users can create, read, update, and delete text-based memories.
+- **Magical Aesthetics:** The UI is designed to feel like a dark, enchanted magical object, with a custom color palette (deep emerald green, dark maroon, and gold accents) and elegant typography.
+- **(Planned) Voice & Video Capture:** Future updates will allow users to capture memories using voice recordings and short videos.
+- **(Planned) AI-Powered Insights:** An AI will process entries to identify patterns and connect related events.
+- **(Planned) Narrative-Driven Experience:** The AI will generate "Memory Stories" in a video format, narrated by a user-chosen avatar.
+- **(Planned) Keeper Access:** Users will be able to grant access to a trusted person (a "Keeper") to explore their memories.
+
+## 🛠️ Technology Stack
+
+- **Frontend:** [Next.js](https://nextjs.org/) (with App Router)
+- **Backend & Database:** [Supabase](https://supabase.io/) (for user authentication, database, and storage)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+
+## 🚀 Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
@@ -10,27 +31,19 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You will need to create a `.env.local` file in the root of the project and add your Supabase project URL and anon key:
 
-## Learn More
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Database Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You will also need to run the necessary SQL script to set up the `memories` table in your Supabase database. You can find the script in the project history or by asking the development team.

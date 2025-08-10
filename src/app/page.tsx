@@ -1,47 +1,29 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center p-4">
       <header className="mb-8">
-        <h1 className="text-5xl font-bold font-serif">Horcrux</h1>
-        <p className="text-center text-muted-foreground">Entrust your thoughts to the ether.</p>
+        <h1 className="text-7xl font-bold font-serif text-primary">Horcrux</h1>
+        <p className="text-xl text-muted-foreground mt-2">
+          Your thoughts, your memories, your soul. Preserved for eternity.
+        </p>
       </header>
 
-      <main className="w-full max-w-2xl px-4">
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Create a new memory</CardTitle>
-            <CardDescription>What's on your mind? Capture it before it fades.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form className="flex flex-col gap-4">
-              <Input placeholder="Title of your memory..." />
-              <Textarea placeholder="Describe your memory in detail..." />
-            </form>
-          </CardContent>
-          <CardFooter>
-            <Button>Imprint Memory</Button>
-          </CardFooter>
-        </Card>
-
-        <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-center mb-4">Your Memories</h2>
-            {/* Notes will be displayed here */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>My first memory</CardTitle>
-                    <CardDescription>2024-01-01</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <p>This is a placeholder for a memory that has been stored.</p>
-                </CardContent>
-            </Card>
-        </div>
+      <main className="mb-8">
+        <p className="max-w-2xl mx-auto text-lg">
+          Horcrux is a private sanctuary for your memories. Capture your daily thoughts, feelings, and experiences through text, voice, or video. Our AI will connect the threads of your life, allowing you to explore your own story in a way you never thought possible.
+        </p>
       </main>
+
+      <footer>
+        <Link href="/login">
+          <Button size="lg" className="text-lg">
+            Begin Your Journey
+          </Button>
+        </Link>
+      </footer>
     </div>
-  );
+  )
 }
