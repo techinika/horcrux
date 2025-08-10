@@ -47,3 +47,38 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ### Database Setup
 
 You will also need to run the necessary SQL script to set up the `memories` table in your Supabase database. You can find the script in the project history or by asking the development team.
+
+```bash
+-- Create the memories table
+CREATE TABLE public.memories (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now() NOT NULL,
+  title TEXT,
+  content TEXT,
+  type TEXT NOT NULL CHECK (type IN ('text', 'voice', 'video'))
+);
+
+-- Enable Row Level Security for the memories table
+ALTER TABLE public.memories ENABLE ROW LEVEL SECURITY;
+
+-- Create a policy that allows users to see their own memories
+CREATE POLICY "Users can view their own memories"
+ON public.memories FOR SELECT
+USING (auth.uid() = user_id);
+
+-- Create a policy that allows users to insert their own memories
+CREATE POLICY "Users can insert their own memories"
+ON public.memories FOR INSERT
+WITH CHECK (auth.uid() = user_id);
+
+-- Create a policy that allows users to update their own memories
+CREATE POLICY "Users can update their own memories"
+ON public.memories FOR UPDATE
+USING (auth.uid() = user_id);
+
+-- Create a policy that allows users to delete their own memories
+CREATE POLICY "Users can delete their own memories"
+ON public.memories FOR DELETE
+USING (auth.uid() = user_id);
+```
