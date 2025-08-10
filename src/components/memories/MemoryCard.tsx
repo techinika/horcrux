@@ -1,11 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { updateMemory, deleteMemory } from '@/app/memories/actions'
+
+const MotionCard = motion(Card);
 
 interface Memory {
   id: string;
@@ -26,12 +29,12 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
   }
 
   return (
-    <Card>
+    <MotionCard whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
       {isEditing ? (
         <form action={handleUpdate}>
           <input type="hidden" name="id" value={memory.id} />
           <CardHeader>
-            <Input name="title" defaultValue={memory.title ?? ''} className="text-2xl font-bold" />
+            <Input name="title" defaultValue={memory.title ?? ''} className="text-2xl font-bold font-serif" />
           </CardHeader>
           <CardContent>
             {memory.type === 'text' ? (
@@ -73,6 +76,6 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
           </CardContent>
         </>
       )}
-    </Card>
+    </MotionCard>
   )
 }

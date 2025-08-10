@@ -24,38 +24,38 @@ const config = {
         serif: ["var(--font-cinzel)"],
       },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: '#284B28',
+        input: '#284B28',
+        ring: '#FFD700',
+        background: '#0D1A0D',
+        foreground: '#EAE8D8',
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: '#FFD700',
+          foreground: '#0D1A0D',
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: '#800000',
+          foreground: '#EAE8D8',
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: '#A52A2A',
+          foreground: '#EAE8D8',
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: '#284B28',
+          foreground: '#9E9D8F', // Muted version of foreground
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: '#F0E68C',
+          foreground: '#0D1A0D',
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: '#0D1A0D',
+          foreground: '#EAE8D8',
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: '#142514',
+          foreground: '#EAE8D8',
         },
       },
       borderRadius: {
